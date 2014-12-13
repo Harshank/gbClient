@@ -4,7 +4,7 @@
  */
 
 var crypto=require('crypto');
-var secretKey="01SN1B2C735A2E91CDE9E26CA092K";
+var secretKey="328981B2C735A2E91CDE9E26C98287";
 
 var getHash=function(state,ts){
 	

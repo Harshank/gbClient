@@ -67,7 +67,7 @@ exports.GumballAction = function(req, res) {
 
 		state = 'HasACoin';
 		var messagesToBePut = [];
-		var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+"\n"+state+"\n\n";
+		var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+"Count"+req.param('count')+"\n"+state+"\n\n";
 		
 		
 		res.render('index', {
@@ -105,7 +105,7 @@ exports.GumballAction = function(req, res) {
 							console.log(data);
 							// raw response
 							console.log(response);
-							var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+"\n"+state+"\n\n";
+							var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+"Count"+count+"\n"+state+"\n\n";
 							res.render('index', {
 								message : msg,state:state,ts:ts,hash:getHash(state,ts),modelNumber:modelNumber,serialNumber:serialNumber
 							});
