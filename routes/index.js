@@ -101,7 +101,7 @@ exports.GumballAction = function(req, res) {
 						"Content-Type" : "application/json"
 					}
 				};
-				client.put("http://gumball-gumballprasad.rhcloud.com/gumball/1", args,
+				client.put("http://gbserver-harshank.rhcloud.com/1", args,
 						function(data, response) {
 							// parsed response body as js object
 							console.log(data);
