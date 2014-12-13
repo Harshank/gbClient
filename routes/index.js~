@@ -3,7 +3,7 @@
  */
 
 var crypto=require('crypto');
-var secretKey="0189nfiwaerwofnwe9r8uyweunzx9cew0u9f59";
+var secretKey="dlksnfiwaerwofnwe9r8uyweunzx9cew0u98erq";
 
 var getHash=function(state,ts){
 	
@@ -82,7 +82,7 @@ exports.GumballAction = function(req, res) {
 		var messagesToBePutInPost = [];
 		var Client = require('node-rest-client').Client;
 		var client = new Client();
-		client.get("http://gumball-gumballprasad.rhcloud.com", function(data,
+				client.put("http://gbserver-harshank.rhcloud.com/1", args,
 				response) {
 			var ar = {};
 
@@ -101,7 +101,7 @@ exports.GumballAction = function(req, res) {
 						"Content-Type" : "application/json"
 					}
 				};
-				client.put("http://gumball-gumballprasad.rhcloud.com/gumball/1", args,
+				client.put("http://gbserver-harshank.rhcloud.com/1", args,
 						function(data, response) {
 							// parsed response body as js object
 							console.log(data);
