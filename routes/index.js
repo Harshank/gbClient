@@ -113,7 +113,7 @@ exports.GumballAction = function(req, res) {
 
 			}else{
 				
-				var msg="\n\n Mighty Gumball INC \n Model#"+data.modelNumber+"\n"+"Serial #"+data.serialNumber++"\n"+"OutOfStock"+"\n\n";
+				var msg="\n\n Mighty Gumball INC \n Model#"+data.modelNumber+"\n"+"Serial #"+data.serialNumber+"\n"+"OutOfStock"+"\n\n";
 				res.render('index', {
 					message : messagesToBePutInPost
 				});

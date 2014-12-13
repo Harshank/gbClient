@@ -67,7 +67,7 @@ exports.GumballAction = function(req, res) {
 
 		state = 'HasACoin';
 		var messagesToBePut = [];
-		var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+"Count"+req.param('count')+"\n"+state+"\n\n";
+		var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+state+"\n\n";
 		
 		
 		res.render('index', {
