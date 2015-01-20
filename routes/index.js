@@ -6,17 +6,13 @@ var crypto=require('crypto');
 var secretKey="dlksnfiwaerwofnwe9r8uyweunzx9cew0u98erq";
 
 var getHash=function(state,ts){
-	
 	var text=state+"|"+ts+"|"+secretKey;
 	var hmac=crypto.createHmac("sha256",secretKey);
 	hmac.setEncoding('base64');
 	hmac.write(text);
 	hmac.end();
 	var hash=hmac.read();
-	return hash;
-	
-	
-	
+	return hash;	
 }
 
 exports.index = function(req, res) {
@@ -29,19 +25,13 @@ exports.index = function(req, res) {
 	var client = new Client();
 
 	// direct way
-	client.get("http://gbserver-harshank.rhcloud.com", function(data,
-			response) {
-
+	client.get("http://gbserver-harshank.rhcloud.com", function(data, response) {
 		var count=data.countGumballs;
 		var msg="\n\n Mighty Gumball INC \n Model#"+data.modelNumber+"\n"+"Serial #"+data.serialNumber+"\n"+"\n"+state+"\n\n";
-		
-
 		res.render('index', {
 			message : msg,state:state,ts:ts,hash:hash,modelNumber:data.modelNumber,serialNumber:data.serialNumber
 		});
-
 	});
-
 };
 
 exports.GumballAction = function(req, res) {
@@ -56,25 +46,18 @@ exports.GumballAction = function(req, res) {
 	var diff=((now-ts)/1000);
 	hash2=getHash(state,ts);
 	if(diff>120 || hash1!=hash2){
-		//error(req,res,"********Session Invalid********");
+
 		res.render('index', {
 			message : "********Session Invalid********"
 		});
-	}
-	
-
-	// var message=req.param('message');
+	}	
 	if (action === 'InsertQuater' && state === 'NoCoinState') {
-
 		state = 'HasACoin';
 		var messagesToBePut = [];
 		var msg="\n\n Mighty Gumball INC \n Model#"+modelNumber+"\n"+"Serial #"+serialNumber+"\n"+"\n"+state+"\n\n";
-		
-		
 		res.render('index', {
 			message : msg,state:state,ts:ts,hash:getHash(state,ts),modelNumber:modelNumber,serialNumber:serialNumber
 		});
-
 	}
 	
 	//COde for turn the crank,only if the state is HasACoin
@@ -82,14 +65,10 @@ exports.GumballAction = function(req, res) {
 		var messagesToBePutInPost = [];
 		var Client = require('node-rest-client').Client;
 		var client = new Client();
-		client.get("http://gbserver-harshank.rhcloud.com", function(data,
-				response) {
+		client.get("http://gbserver-harshank.rhcloud.com", function(data, response) {
 			var ar = {};
-
 			ar = data;
-
 			var count = ar.countGumballs;
-
 			if (count !== 0) {
 				state="NoCoinState"
 				count = count - 1;
@@ -101,8 +80,7 @@ exports.GumballAction = function(req, res) {
 						"Content-Type" : "application/json"
 					}
 				};
-				client.put("http://gbserver-harshank.rhcloud.com/gumball/1", args,
-						function(data, response) {
+				client.put("http://gbserver-harshank.rhcloud.com/gumball/1", args, function(data, response) {
 							// parsed response body as js object
 							console.log(data);
 							// raw response
@@ -112,17 +90,12 @@ exports.GumballAction = function(req, res) {
 								message : msg,state:state,ts:ts,hash:getHash(state,ts),modelNumber:modelNumber,serialNumber:serialNumber
 							});
 						});
-
-			}else{
-				
+			} else {				
 				var msg="\n\n Mighty Gumball INC \n Model#"+data.modelNumber+"\n"+"Serial #"+data.serialNumber+"\n"+"\n"+"OutOfStock"+"\n\n";
 				res.render('index', {
 					message : messagesToBePutInPost
 				});
 			}
-
 		});
-
 	}
-
 };

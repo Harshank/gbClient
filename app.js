@@ -8,14 +8,9 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
-
-
 var app = express();
-
-
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3333);
 app.set('ip_address', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -29,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.post('/GumballAction',routes.GumballAction);
